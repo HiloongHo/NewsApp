@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
+    <!--
+        应用程序的清单文件，定义了应用程序的基本属性和组件。
+    -->
 
     <application
+        android:name=".NewsApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -10,17 +14,41 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NewsApp"
+        android:theme="@style/App.Starting.Theme"
         tools:targetApi="31" >
+        <!--
+            定义应用程序的主组件，包括名称、图标、标签等属性。
+            android:name: 指定应用程序的入口类。
+            android:allowBackup: 是否允许备份。
+            android:icon: 应用程序的图标。
+            android:label: 应用程序的标签，引用的是资源文件中的字符串。
+            android:theme: 应用程序的主题样式。
+            tools:targetApi: 指定应用的目标 API 级别。
+        -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.NewsApp" >
+            android:label="及時新聞"
+            android:theme="@style/App.Starting.Theme" >
+            <!--
+                定义活动（Activity），这里是主活动。
+                android:name: 指定活动的类名。
+                android:exported: 是否允许其他应用程序启动该活动。
+                android:label: 该活动的标签。
+                android:theme: 该活动的主题样式。
+            -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <!--
+                    指定该活动为启动活动，当启动应用程序时将首先启动这个活动。
+                    android:name: 指定动作的名称，这里是主动作。
+                -->
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <!--
+                    指定该活动的类别，这里是启动器类别。
+                    android:name: 指定类别的名称，这里是启动器类别。
+                -->
             </intent-filter>
         </activity>
     </application>

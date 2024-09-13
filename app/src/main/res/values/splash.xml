@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 定义启动应用时的主题样式 -->
+    <style name="App.Starting.Theme" parent="Theme.SplashScreen">
+        <!-- 设置启动屏幕的背景颜色为白色 -->
+        <item name="windowSplashScreenBackground">#FFFF</item>
+        <!-- 设置启动屏幕的动画图标为 ic_splash -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <!-- 定义启动屏幕结束后的主题为 Theme.NewsApp -->
+        <item name="postSplashScreenTheme">@style/Theme.NewsApp</item>
+    </style>
+</resources>

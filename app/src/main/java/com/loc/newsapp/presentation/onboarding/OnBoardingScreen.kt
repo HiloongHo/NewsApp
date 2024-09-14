@@ -1,15 +1,7 @@
 package com.loc.newsapp.presentation.onboarding
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
@@ -27,6 +19,11 @@ import com.loc.newsapp.presentation.onboarding.components.OnBoardingPage
 import kotlinx.coroutines.launch
 import kotlin.reflect.KSuspendFunction1
 
+/**
+ * Composable function for displaying the onboarding screen.
+ *
+ * @param event A suspend function for handling onboarding events. It takes an [OnBoardingEvent] as a parameter.
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen(
@@ -35,10 +32,12 @@ fun OnBoardingScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+        // Remember the pager state, initial page is 0
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
         }
 
+        // Remember the button state based on the current page
         val buttonState = remember {
             derivedStateOf {
                 when (pagerState.currentPage) {
@@ -50,10 +49,13 @@ fun OnBoardingScreen(
             }
         }
 
+        // Display different onboarding pages based on the current page index
         HorizontalPager(state = pagerState) { index ->
             OnBoardingPage(page = pages[index])
         }
         Spacer(modifier = Modifier.weight(1f))
+
+        // Display the page indicator and buttons at the bottom of the screen
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -68,13 +70,13 @@ fun OnBoardingScreen(
                 selectedPage = pagerState.currentPage
             )
 
-
-
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // Remember a CoroutineScope for pager state switching animations
                 val scope = rememberCoroutineScope()
 
+                // Display the previous button if there is a previous page
                 if (buttonState.value[0].isNotEmpty()) {
                     NewsTextButton(
                         text = buttonState.value[0],
@@ -85,6 +87,8 @@ fun OnBoardingScreen(
                         }
                     )
                 }
+
+                // Display the next or finish button based on the current page
                 NewsButton(
                     text = buttonState.value[1],
                     onClick = {
@@ -94,7 +98,6 @@ fun OnBoardingScreen(
                             } else {
                                 pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                             }
-
                         }
                     }
                 )

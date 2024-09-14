@@ -1,56 +1,87 @@
+// 定义项目中使用的各种插件
 plugins {
+    // 安卓应用插件，提供基本的构建逻辑
     id 'com.android.application'
+    // Kotlin安卓插件，集成Kotlin支持
     id 'org.jetbrains.kotlin.android'
+    // Kotlin编译时注解处理器
     id 'kotlin-kapt'
+    // Dagger Hilt插件，用于依赖注入
     id 'com.google.dagger.hilt.android'
+    // Kotlin序列化插件，简化对象序列化过程
     id 'kotlin-parcelize'
 }
 
+// 配置安卓项目的基本属性
 android {
+    // 设置应用的名称空间，用于区分不同的安卓应用
     namespace 'com.loc.newsapp'
+    // 设置编译SDK的版本
     compileSdk 33
 
+    // 配置默认的构建变体
     defaultConfig {
+        // 应用的包名，用于唯一标识应用
         applicationId "com.loc.newsapp"
+        // 设置应用支持的最低安卓版本
         minSdk 24
+        // 设置应用的目标安卓版本
         targetSdk 33
+        // 设置应用的版本号代码
         versionCode 1
+        // 设置应用的版本号名称
         versionName "1.0"
 
+        // 设置测试运行器，用于运行安卓测试
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // 配置向量绘图资源使用支持库
         vectorDrawables {
             useSupportLibrary true
         }
     }
 
+    // 配置不同的构建类型
     buildTypes {
+        // 配置发布版本
         release {
+            // 禁用代码混淆
             minifyEnabled false
+            // 设置代码混淆文件
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    // 配置Java编译选项
     compileOptions {
+        // 设置源代码兼容性和目标代码兼容性的Java版本
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    // 配置Kotlin编译选项
     kotlinOptions {
+        // 设置Kotlin编译目标的JVM版本
         jvmTarget = '17'
     }
+    // 启用Jetpack Compose支持
     buildFeatures {
         compose true
     }
+    // 配置Jetpack Compose选项
     composeOptions {
+        // 设置Kotlin编译器扩展版本
         kotlinCompilerExtensionVersion = "1.4.7"
     }
+    // 配置打包选项
     packagingOptions {
         resources {
+            // 排除不需要的资源文件
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
 }
 
+// 配置项目依赖关系
 dependencies {
-
+    // 定义项目所需的库和框架
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
@@ -68,41 +99,40 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-    //Splash Api
+    // 添加Splash Screen支持
     implementation "androidx.core:core-splashscreen:1.0.1"
 
-    //Compose Navigation
+    // 配置导航组件版本
     def nav_version = "2.6.0"
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
-    //Dagger Hilt
+    // 添加Dagger Hilt依赖注入支持
     implementation "com.google.dagger:hilt-android:2.45"
     kapt "com.google.dagger:hilt-compiler:2.45"
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
-
-    //Retrofit
+    // 添加Retrofit网络请求库
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    //Coil
+    // 添加Coil图片加载库
     implementation("io.coil-kt:coil-compose:2.4.0")
 
-    //Datastore
+    // 添加Datastore持久化库
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
-    //Compose Foundation
+    // 添加Compose Foundation组件
     implementation "androidx.compose.foundation:foundation:1.4.3"
 
-    //Accompanist
+    // 添加Accompanist系统UI控制器
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta"
 
-    //Paging 3
+    // 配置Paging 3分页库
     def paging_version = "3.1.1"
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "androidx.paging:paging-compose:3.2.0-rc01"
 
-    //Room
+    // 添加Room数据库支持
     def room_version = "2.5.2"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

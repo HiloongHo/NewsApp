@@ -25,10 +25,13 @@ import com.loc.newsapp.presentation.common.NewsTextButton
 import com.loc.newsapp.presentation.common.PageIndicator
 import com.loc.newsapp.presentation.onboarding.components.OnBoardingPage
 import kotlinx.coroutines.launch
+import kotlin.reflect.KSuspendFunction1
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    event: KSuspendFunction1<OnBoardingEvent, Unit>
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -86,8 +89,8 @@ fun OnBoardingScreen() {
                     text = buttonState.value[1],
                     onClick = {
                         scope.launch {
-                            if (pagerState.currentPage == 3) {
-
+                            if (pagerState.currentPage == 2) {
+                                event(OnBoardingEvent.SaveAppEntry)
                             } else {
                                 pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                             }

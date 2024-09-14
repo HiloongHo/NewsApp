@@ -1,4 +1,4 @@
-package com.loc.newsapp.domain.usecases
+package com.loc.newsapp.domain.usecases.qpp_entry
 
 /**
  * AppEntryUseCases 数据类封装了应用程序入口的使用案例。

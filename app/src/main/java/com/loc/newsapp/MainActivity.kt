@@ -10,6 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.loc.newsapp.presentation.nvgraph.NavGraph
 import com.loc.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     // 使用 Hilt 和 Android ViewModel 来获取 MainViewModel 实例
-    val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +42,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             // 使用自定义的主题包装器
             NewsAppTheme {
+                val isSystemInDarkMode = isSystemInDarkTheme()
+                val systemController= rememberSystemUiController()
+                SideEffect {
+                    systemController.setStatusBarColor(
+                        color = Color.Transparent,
+                        darkIcons = !isSystemInDarkMode
+                    )
+                }
                 // 在Box中放置欢迎屏幕，作为主活动的初始界面
                 Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
                     val startDestination = viewModel.startDestination

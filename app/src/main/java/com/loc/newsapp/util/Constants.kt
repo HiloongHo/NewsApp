@@ -7,4 +7,6 @@ object Constants {
 
     // 应用程序入口的键，可能用于标识用户是如何进入应用程序的，例如通过通知、快捷方式等
     const val APP_ENTRY = "appEntry"
+
+    const val API_KEY = "6e4a428650a54bb9be6dc499792b7add"
 }

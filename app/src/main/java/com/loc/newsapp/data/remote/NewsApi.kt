@@ -13,7 +13,6 @@ interface NewsApi {
      * 获取新闻信息
      *
      * 该函数通过Retrofit框架从远程服务器获取新闻数据，使用了 suspend 修饰符，使其可以在协程中调用
-     *
      * @param string 指定新闻来源的字符串
      * @param page 页码，用于分页加载数据
      * @param apiKey API密钥，用于验证请求的合法性，默认为预定义的API_KEY
@@ -23,6 +22,7 @@ interface NewsApi {
     suspend fun getNews(
         @Query("sources") string: String,
         @Query("page") page: Int,
+        @Query("language") language: String = "en", // 默认返回英文新闻
         @Query("apiKey") apiKey: String = API_KEY
     ): NewsResponce
 }

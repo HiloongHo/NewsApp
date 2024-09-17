@@ -5,6 +5,7 @@
         应用程序的清单文件，定义了应用程序的基本属性和组件。
     -->
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".NewsApplication"
         android:allowBackup="true"

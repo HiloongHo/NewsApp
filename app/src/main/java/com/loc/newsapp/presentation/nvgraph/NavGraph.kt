@@ -8,6 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.loc.newsapp.presentation.home.HomeScreen
+import com.loc.newsapp.presentation.home.HomeViewModel
 import com.loc.newsapp.presentation.onboarding.OnBoardingScreen
 import com.loc.newsapp.presentation.onboarding.OnBoardingViewModel
 
@@ -54,7 +57,9 @@ fun NavGraph(
             // 定义新闻导航器屏幕的具体内容
             composable(route = Route.NewsNavigatorScreen.route) {
                 // 此处为示例，应替换为实际的新闻导航器屏幕实现
-                Text(text = "News Navigator Screen")
+                val viewModel:HomeViewModel = hiltViewModel()
+                val articles = viewModel.news.collectAsLazyPagingItems()
+                HomeScreen(articles, navigate = {})
             }
         }
     }

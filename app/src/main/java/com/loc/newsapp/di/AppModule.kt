@@ -54,6 +54,11 @@ object AppModule {
         saveAppEntry = SaveAppEntry(localUserManger)
     )
 
+    /**
+     * 提供NewsApi的实例。
+     *
+     * @return NewsApi接口的实例，通过Retrofit构建。
+     */
     @Provides
     @Singleton
     fun provideNewsApi(): NewsApi {
@@ -61,6 +66,12 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create()).build().create(NewsApi::class.java)
     }
 
+    /**
+     * 提供新闻仓库的实现。
+     *
+     * @param newsApi NewsApi接口的实例。
+     * @return NewsRepository接口的实现类NewsRepositoryImpl。
+     */
     @Provides
     @Singleton
     fun provideNewsRepository(
@@ -69,6 +80,12 @@ object AppModule {
         return NewsRepositoryImpl(newsApi)
     }
 
+    /**
+     * 提供新闻相关的UseCases。
+     *
+     * @param repository 新闻仓库实例。
+     * @return NewsUseCases对象，包含获取新闻的UseCase。
+     */
     @Provides
     @Singleton
     fun provideNewsUseCases(
